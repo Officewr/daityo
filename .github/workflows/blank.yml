@@ -1,5 +1,6 @@
+ファイルを上書き保存
 Sub SaveWorkbook()
-    Dim filePath As String
+    Dim　filePath As String
     Dim fileName As String
     
     ' ファイルパスとファイル名を指定
@@ -20,3 +21,33 @@ Sub SaveWorkbook()
         MsgBox "ファイルの保存中にエラーが発生しました。", vbExclamation
     End If
 End Sub
+
+
+ファイルコピーを作成
+Sub CopyFileToDirectory()
+    Dim SourcePath As String
+    Dim DestinationPath As String
+    Dim FileName As String
+    
+    ' 元のディレクトリのパスを取得
+    SourcePath = ThisWorkbook.Path
+    
+    ' コピー先のディレクトリのパスを指定
+    DestinationPath = "D:\work\"
+    
+    ' ファイル名を取得
+    FileName = ThisWorkbook.Name
+    
+    ' ファイルをコピー
+    On Error Resume Next
+    FileCopy SourcePath & "\" & FileName, DestinationPath & FileName
+    On Error GoTo 0
+    
+    ' エラーチェック
+    If Err.Number = 0 Then
+        MsgBox "ファイルがコピーされました。"
+    Else
+        MsgBox "ファイルのコピー中にエラーが発生しました。"
+    End If
+End Sub
+
